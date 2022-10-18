@@ -1,1 +1,1 @@
-# PGS-Basic-demos
+# PGS-demos
