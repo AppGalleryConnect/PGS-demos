@@ -8,8 +8,4 @@ export default class Global {
   public static playerIconUrl = '';
   public static gameWin = false;
 
-  // GameOBE project info
-  public static appId = '1******9';
-  public static clientId = '71*******88';
-  public static clientSecret = 'AB6****************************33EA';
 }
