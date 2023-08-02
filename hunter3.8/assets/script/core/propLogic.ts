@@ -233,6 +233,13 @@ export class PropLogic extends Component {
                             GobeUtil.instance.sendFrame({'A': Constant.ACTION.ICON, 'V': prop.id, 'AI' : 1});
                         }else{
                             GobeUtil.instance.sendFrame({'A': Constant.ACTION.ICON, 'V': prop.id});
+
+                            //故意添加for循环增加一个性能bug
+                            for (let index = 0; index < 10000; index++) {
+                                let node = new Node();
+                                node.setPosition(1000,1000,1000);
+                                node.destroy();
+                            }
                         }
                     }else{
                         return;
