@@ -121,12 +121,9 @@ dependencies {
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.24"
 
     // maven依赖测试验证
-    implementation "com.huawei.game.midplatform:mmsdk-common:1.8.1.307"
-    implementation "com.huawei.game.midplatform:mmsdk-gmme:1.8.1.307"
-    implementation "com.huawei.game.midplatform:mmsdk-gmme-im:1.8.1.307"
-    implementation "com.huawei.game.midplatform:mmsdk-gmme-audio-msg:1.8.1.307"
 
-    implementation 'com.huawei.game.moment.sdk:gamemomentsdk:13.0.1.300'
+
+    implementation 'com.huawei.game.moment.sdk:gamemomentsdk:13.5.1.301'
     implementation 'com.huawei.hms:hwid:6.11.0.300'
     implementation 'com.huawei.hms:game:6.10.0.300'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
