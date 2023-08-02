@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.huawei.ohos.app'
+
+ohos {
+    signingConfigs {
+        release {
+            storeFile file('/Users/test/Documents/cocos/hunter/key/huawei.p12')
+            storePassword '0000001963ACD7F5E4DDA6E483F81E415EFEC374C3C40CDC4CB6C9EA82C76E2DAEFB2B8BD064E0DB47'
+            keyAlias 'huawei'
+            keyPassword '000000190A78059BA34167577A88BAEAA0E32BA65E87500D654F01265709D1D397AA4E82314712BD0F'
+            signAlg 'SHA256withECDSA'
+            profile file('/Users/test/Documents/cocos/hunter/key/releaseRelease.p7b')
+            certpath file('/Users/test/Documents/cocos/hunter/key/release.cer')
+        }
+        debug {
+            storeFile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p12')
+            storePassword '0000001AC8FACCD803EAEB0CC9701E818CDACA4C34324B0E58C7D0D3FE87BD4B4650802CB84241D266D5'
+            keyAlias = 'debugKey'
+            keyPassword '0000001A4AC3F37D562532F817B3C72FCC62226DFBE4FC896D8AAEF0025A400AAACF99997979B6D7EE47'
+            signAlg = 'SHA256withECDSA'
+            profile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p7b')
+            certpath file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.cer')
+        }
+    }
+    compileSdkVersion 7
+    defaultConfig {
+        compatibleSdkVersion 5
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://mirrors.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.huawei.ohos:hap:3.1.5.0'
+        classpath 'com.huawei.ohos:decctest:1.2.7.20'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://mirrors.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+        mavenCentral()
+    }
+}
+

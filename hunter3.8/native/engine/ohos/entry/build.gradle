@@ -1,0 +1,87 @@
+apply plugin: 'com.huawei.ohos.hap'
+//apply plugin: 'com.huawei.agconnect'
+
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p12')
+            storePassword '0000001AF22C5DFB5C59F66149D94ED1C4A06888E1A9BE790834F40C1D91225019AE7845A134A259AB99'
+            keyAlias 'debugKey'
+            keyPassword '0000001A2892C8984A42E1A06D80D6DA4B09A7F1F6407ECB4D59516549F6604DE0486DAF4A61FC4D4299'
+            signAlg 'SHA256withECDSA'
+            profile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p7b')
+            certpath file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.cer')
+        }
+        release {
+            storeFile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p12')
+            storePassword '0000001AF22C5DFB5C59F66149D94ED1C4A06888E1A9BE790834F40C1D91225019AE7845A134A259AB99'
+            keyAlias 'debugKey'
+            keyPassword '0000001A2892C8984A42E1A06D80D6DA4B09A7F1F6407ECB4D59516549F6604DE0486DAF4A61FC4D4299'
+            signAlg 'SHA256withECDSA'
+            profile file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.p7b')
+            certpath file('/Users/test/.ohos/config/auto_debug_ohos_com.cocos.hunter_900086000022137284.cer')
+        }
+    }
+    compileSdkVersion 7
+    defaultConfig {
+        compatibleSdkVersion 7
+    }
+    externalNativeBuild {
+        path "../CMakeLists.txt"
+        arguments "-v", "-DRES_DIR=${RES_PATH}"
+        abiFilters "arm64-v8a"
+        cppFlags "-std=c++14"
+    }
+
+//     sourceSets.main {
+//         java.srcDirs 'src/main/java' //, "${ENGINE_ROOT}/cocos/platform/ohos/java/src"
+//     }
+
+    // sync resource
+    def resOutputDir = "${projectDir}/src/main/resources/rawfile"
+    def resSourceDir = "${RES_PATH}/data"
+    assert file("${resSourceDir}/main.js").exists()
+    assert file(resOutputDir).exists()
+    task syncResourcesToRawfile(type: Sync) {
+        from resSourceDir
+        into resOutputDir
+    }
+    tasks.getByName("preBuild").dependsOn syncResourcesToRawfile
+
+
+    allprojects {
+        repositories {
+            // Add the Maven address.
+            maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+            maven { url 'https://developer.huawei.com/repo/' }
+
+            maven {
+                url 'https://mirrors.huaweicloud.com/repository/maven/'
+            }
+        }
+    }
+    buildscript {
+        repositories {
+            // Add the Maven address.
+            maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+            maven { url 'https://developer.huawei.com/repo/' }
+
+            maven {
+                url 'https://mirrors.huaweicloud.com/repository/maven/'
+            }
+        }
+        dependencies {
+            // Add dependencies.
+            classpath 'com.huawei.agconnect:agcp-harmony:1.5.1.300'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
+    implementation project(path: ':libcocos')
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.huawei.agconnect:agconnect-core-harmony:1.5.1.300'
+    implementation 'com.huaweicloud:esdk-obs-android:3.21.12'
+}
